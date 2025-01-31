@@ -1,0 +1,29 @@
+// Countdown Timer
+function updateCountdown() {
+  const now = new Date();
+  const today2PM = new Date(now);
+  today2PM.setHours(14, 0, 0, 0); // Set to 2 PM
+
+  if (now > today2PM) {
+    // If it's past 2 PM, set the timer for tomorrow
+    today2PM.setDate(today2PM.getDate() + 1);
+  }
+
+  const timeDifference = today2PM - now;
+  const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  document.getElementById('countdown-timer').innerHTML = `
+    ${hours}h ${minutes}m ${seconds}s
+  `;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Play Audio on Button Click
+document.getElementById('chant-button').addEventListener('click', () => {
+  const audio = document.getElementById('chant-audio');
+  audio.play();
+});
